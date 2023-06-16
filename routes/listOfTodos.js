@@ -1,11 +1,12 @@
 const express = require('express');
 const list_router = express.Router();
 const { randomBytes} = require('crypto');
+const ListOfTodo = require("../models/listOfTodo");
 
-let listOfLists = []
 
-  list_router.get("/listOfTodos", (req,res)=>{
-    res.json(listOfLists)
+  list_router.get("/listOfTodos", async (req,res)=>{
+    const list = await ListOfTodo.find({})
+    res.json(list)
   })
 
   list_router.post("/listOfTodos", (req, res)=>{

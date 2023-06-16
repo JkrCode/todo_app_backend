@@ -1,25 +1,17 @@
 const express = require('express');
 const todo_router = express.Router();
-const { randomBytes} = require('crypto');
+const Todo = require("../models/Todo");
 
-
-let todos= []
 
 // Beispiel-Endpunkt
-todo_router.get('/todos', (req, res) => {
-  res.json(todos);
-  console.log("hello")
+todo_router.get('/todos', async (req, res) => {
+  const todo = await Todo.find();
+  res.json(todo);
 });
 
-todo_router.post("/todos", (req, res)=>{
-  const newTodoId = randomBytes(4).toString('hex');
-  const newTodo = {
-    label: req.body.label, 
-    description: req.body.description,
-    id: newTodoId,
-    listId: req.body.listId
-  }
-  todos.push(newTodo);
+todo_router.post("/todos", async(req, res)=>{
+  const newTodo = new Todo(req.body);
+  await newTodo.save();
   res.status(201).json(newTodo)
 })
 
