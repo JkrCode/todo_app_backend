@@ -8,6 +8,7 @@ let todos= []
 // Beispiel-Endpunkt
 todo_router.get('/todos', (req, res) => {
   res.json(todos);
+  console.log(res.json)
 });
 
 todo_router.post("/todos", (req, res)=>{
