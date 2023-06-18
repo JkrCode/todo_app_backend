@@ -20,7 +20,9 @@ todo_router.delete("/todos", async (req,res)=>{
 } )
 
 todo_router.put("/todos", async (req, res) => {
-  await Todo.findByIdAndUpdate(req.query.id, req.body, {runValidators: true})
+  const toUpdate = await Todo.findOne({_id: req.query.id})
+  await toUpdate.updateOne(req.body)
+  console.log(req.body)
   res.sendStatus(204);
 })
 
