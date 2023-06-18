@@ -5,12 +5,14 @@ const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
 
+const dbUrl = process.env.DB_URL;
 
-mongoose.connect('mongodb://127.0.0.1:27017/todo_app', {useNewUrlParser: true})
+//for local dev
+const dbLocalUrl=process.env.DB_URL_Local;
+
+mongoose.connect(dbUrl, {useNewUrlParser: true})
     .then(()=>{console.log("connection Open to local DB")})
     .catch(err => {console.log("Error"), console.log(err)});
-
-
 
 const app = express();
 app.use(cors());

@@ -1,7 +1,7 @@
 const express = require('express');
 const list_router = express.Router();
-const { randomBytes} = require('crypto');
 const ListOfTodo = require("../models/listOfTodo");
+const Todo = require("../models/todo");
 
 
   list_router.get("/listOfTodos", async (req,res)=>{
@@ -9,21 +9,18 @@ const ListOfTodo = require("../models/listOfTodo");
     res.json(list)
   })
 
-  list_router.post("/listOfTodos", (req, res)=>{
-    const newListId = randomBytes(4).toString('hex');
-    const newList = {
-      label: req.body.label, 
-      type: req.body.type,
-      id: newListId
-    }
-    listOfLists.push(newList);
-    res.send(newList)
+  list_router.post("/listOfTodos", async (req, res)=>{
+    const newList = new ListOfTodo(req.body)
+    await newList.save();
+    res.status(201).json(newList);
   })
 
-  list_router.delete("/listOfTodos", (req,res)=>{
-    const listId = req.params;
-    listOfLists = listOfLists.filter(item => item.id ===listId)
-    res.sendStatus(200)
+  list_router.delete("/listOfTodos", async (req,res)=>{
+    const toDelete = ListOfTodo.findOne({_id: req.query.id});
+    await Todo.deleteMany({listId: req.query.id});
+    await toDelete.deleteOne();
+    res.sendStatus(202)
   } )
+
 
 module.exports = list_router;
