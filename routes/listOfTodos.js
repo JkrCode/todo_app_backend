@@ -16,9 +16,8 @@ const Todo = require("../models/todo");
   })
 
   list_router.delete("/listOfTodos", async (req,res)=>{
-    const toDelete = ListOfTodo.findOne({_id: req.query.id});
+    await ListOfTodo.findOneAndDelete({_id: req.query.id});
     await Todo.deleteMany({listId: req.query.id});
-    await toDelete.deleteOne();
     res.sendStatus(202)
   } )
 
