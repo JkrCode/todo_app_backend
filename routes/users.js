@@ -47,7 +47,7 @@ user_router.post("/user/login", async (req, res, next) => {
 });
 
 user_router.get("/user", ensureAuthenticated, (req, res) => {
-    res.send(req.user); // Das "user" Objekt steht nur eingeloggten Benutzern zur Verfügung
+    res.send(req.user.username); // Das "user" Objekt steht nur eingeloggten Benutzern zur Verfügung
   });
 
 
