@@ -3,6 +3,8 @@ const user_router = express.Router();
 const User = require("../models/userModel");
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const { ensureAuthenticated } = require('../authMiddleware');
+
 
 user_router.post("/user/register", async (req, res)=>{
     try {
@@ -44,8 +46,10 @@ user_router.post("/user/login", async (req, res, next) => {
     }
 });
 
-user_router.get("/user/", (req, res)=>{
-    res.status(202)
-})
+user_router.get("/user", ensureAuthenticated, (req, res) => {
+    res.send(req.user); // Das "user" Objekt steht nur eingeloggten Benutzern zur Verfügung
+  });
+
 
 module.exports = user_router;
+
