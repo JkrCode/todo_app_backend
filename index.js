@@ -6,7 +6,6 @@ const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const passportLocal = require('passport-local').Strategy;
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -25,9 +24,10 @@ const app = express();
 
 //-------------------middlewhere----------------------
 app.use(cors({
-    origin: "http://localhost/3000", //connection of React App, most likely only for dev
+    origin: "http://localhost:3000", //connection of React App, most likely only for dev
     credentials: true
 }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({

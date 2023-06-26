@@ -25,7 +25,7 @@ const { ensureAuthenticated } = require('../authMiddleware');
         type: req.body.type
       });
       await newListOfTodo.save();
-      res.sendStatus(201);
+      res.status(201).json(newListOfTodo);
     } catch (err) {
       res.status(500).send("Internal Server Error");
     }
