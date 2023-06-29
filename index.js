@@ -34,17 +34,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     secret: "secretcode",
     resave: true,
-    saveUninitialized: true
-}))
+    saveUninitialized: true,
+    cookie: {
+      secure: true, // Setze secure auf true, wenn HTTPS verwendet wird
+      sameSite: "None" // Setze sameSite auf None
+    }
+  }));
+
+
 app.use(cookieParser("secretcode"))
 app.use(express.json());
 app.use(passport.initialize());
-app.use(passport.session(
-    {cookie: 
-        {sameSite: 'None',
-        secure: false
-}}
-));
+app.use(passport.session());
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
