@@ -36,8 +36,9 @@ app.use(session({
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
+    proxy: true,
     cookie: {
-      secure: false, // Setze secure auf true, wenn HTTPS verwendet wird
+      secure: true, // Setze secure auf true, wenn HTTPS verwendet wird
       sameSite: "None" // Setze sameSite auf None
     }
   }));
