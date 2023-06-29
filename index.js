@@ -26,6 +26,7 @@ const app = express();
 app.use(cors({
     origin: "http://localhost:3000", //connection of React App, most likely only for dev
     credentials: true
+    
 }));
 
 app.use(bodyParser.json());
