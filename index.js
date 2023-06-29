@@ -31,18 +31,19 @@ app.use(cors({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser("secretcode"))
 app.use(session({
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
     cookie: {
-      secure: true, // Setze secure auf true, wenn HTTPS verwendet wird
+      secure: false, // Setze secure auf true, wenn HTTPS verwendet wird
       sameSite: "None" // Setze sameSite auf None
     }
   }));
 
 
-app.use(cookieParser("secretcode"))
+
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
