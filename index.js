@@ -24,7 +24,7 @@ const app = express();
 
 //-------------------middlewhere----------------------
 app.use(cors({
-    origin: ["http://localhost:3000", "https://todo-app-frontend-red.vercel.app/"],
+    origin: ["http://localhost:3000", "https://todo-app-frontend-red.vercel.app"],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Erlaubte HTTP-Methoden
     allowedHeaders: ['Content-Type', 'Authorization'] // Erlaubte Header
