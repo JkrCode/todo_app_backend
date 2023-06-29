@@ -42,7 +42,7 @@ app.use(passport.initialize());
 app.use(passport.session(
     {cookie: 
         {sameSite: 'None',
-        secure: true
+        secure: false
 }}
 ));
 app.use((req, res, next) => {
