@@ -24,9 +24,9 @@ const app = express();
 
 //-------------------middlewhere----------------------
 app.use(cors({
-    origin: "http://localhost:3000", //connection of React App, most likely only for dev
+    origin: ["http://localhost:3000"],//connection of React App, most likely only for dev
     credentials: true
-    
+
 }));
 
 app.use(bodyParser.json());
@@ -39,7 +39,12 @@ app.use(session({
 app.use(cookieParser("secretcode"))
 app.use(express.json());
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session(
+    {cookie: 
+        {sameSite: 'None',
+        secure: true
+}}
+));
 require("./passportConfig")(passport);
 app.use('/api', todo_router);
 app.use('/api', list_router);
