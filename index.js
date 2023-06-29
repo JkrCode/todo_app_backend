@@ -24,7 +24,7 @@ const app = express();
 
 //-------------------middlewhere----------------------
 app.use(cors({
-    origin: ["http://localhost:3000"],//connection of React App, most likely only for dev
+    origin: ["http://localhost:3000", "https://todo-app-frontend-red.vercel.app/"],
     credentials: true
 
 }));
